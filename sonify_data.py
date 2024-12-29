@@ -4,7 +4,7 @@ import ehtim as eh
 from pydub import AudioSegment
 import matplotlib.pyplot as plt
 
-def sonify(obs,outname,dt=10./60.,plot_coverage=False):
+def sonify(obs,outname,freq_scale = 1/2*1e-9 * 1e2, dt=10./60.,plot_coverage=False):
 	"""
 	Given an observation (in this case, an eht-imaging obsdata object),
 	sonify it by converting visibilities to tones.
@@ -40,8 +40,7 @@ def sonify(obs,outname,dt=10./60.,plot_coverage=False):
 	vright = np.zeros_like(t)
 	full = np.zeros_like(t)
 
-	freq_scale = 1/2*1e-9 * 1e2 #convert lambda to Glambda to kHz to 100 Hz
-
+	
 	for i in range(len(data)):
 		uv_angle = np.arctan2(data[i]['u'],data[i]['v'])
 		amp = data[i]['amp']
